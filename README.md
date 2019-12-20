@@ -19,7 +19,7 @@
 <img src="http://gudi.kr/file/img/Spring/Spring-Legacy1.png" width="100%"></img>
 <img src="http://gudi.kr/file/img/Spring/Spring-Legacy2.png" width="100%"></img>
 
-> * [pom.xml](http://file.gudi.kr/img/Spring/pom.xml)
+> * [pom.xml](http://gudi.kr//img/Spring/pom.xml)
 
 <pre>
   <code>
