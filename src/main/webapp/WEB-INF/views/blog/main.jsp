@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="/resources/blog/css/commons.css">
 	<script src="/resources/blog/js/commons.js"></script>
 </head>
-<body>
+<body onload="sessionCheck()">
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -39,7 +39,7 @@
 	        </div>
 	      </form>
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="/blog/MyEdit"><span class="glyphicon glyphicon-user"></span> 구디</a></li>
+	        <li><a href="/blog/MyEdit"><span class="glyphicon glyphicon-user"></span> ${sessionScope.name}</a></li>
 	        <li><a href="javascript:logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 	        <li><a href="/blog/SignUp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       		<li><a href="/blog/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

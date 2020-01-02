@@ -15,8 +15,9 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		logger.info("Welcome home!");
-		model.addAttribute("message", "GDJ21");
-		return "home";
+//		model.addAttribute("message", "GDJ21");
+//		return "home";
+		return "redirect:/blog/";
 	}
 	
 }

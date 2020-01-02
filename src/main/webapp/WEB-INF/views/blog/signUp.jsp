@@ -5,13 +5,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Blog</title>
-	<link rel="shortcut icon" type="image/x-icon" href="/img/icon_goodee.png">
+	<link rel="shortcut icon" type="image/x-icon" href="/resources/img/icon_goodee.png">
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="${initParam.bootstrap}css/bootstrap.min.css">
 	<script src="${initParam.jquery}jquery.min.js"></script>
 	<script src="${initParam.bootstrap}js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="/blog/css/commons.css">
-	<script src="/blog/js/commons.js"></script>
+	<link rel="stylesheet" href="/resources/blog/css/commons.css">
+	<script src="/resources/blog/js/commons.js"></script>
 </head>
 <body onload="sessionCheck()">
 	<nav class="navbar navbar-inverse">
@@ -26,7 +26,7 @@
 	    </div>
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav">
-	      	<li><a href="/blog/Main">Home</a></li>
+	      	<li><a href="/blog/">Home</a></li>
 	      	<li class="active"><a href="#">Sign Up</a></li>
 	      </ul>
 	      <form class="navbar-form navbar-right" role="search">
@@ -40,8 +40,7 @@
 	        </div>
 	      </form>
 	      <ul class="nav navbar-nav navbar-right">
-	        <%HttpSession sess = request.getSession();%>
-	        <li><a href="/blog/MyEdit"><span class="glyphicon glyphicon-user"></span> <%= sess.getAttribute("name") %></a></li>
+	        <li><a href="/blog/MyEdit"><span class="glyphicon glyphicon-user"></span> ${sessionScope.name}</a></li>
 	        <li><a href="javascript:logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 	        <li><a href="/blog/SignUp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       		<li><a href="/blog/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
