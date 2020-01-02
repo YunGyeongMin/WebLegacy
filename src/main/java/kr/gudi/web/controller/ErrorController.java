@@ -1,4 +1,4 @@
-package kr.gudi.web;
+package kr.gudi.web.controller;
 
 import java.io.IOException;
 
