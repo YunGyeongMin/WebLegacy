@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class BlogController {
 	
-	@RequestMapping("/main")
+	@RequestMapping("/blog/main")
 	public String main() {
 		return "blog/main";
 	}

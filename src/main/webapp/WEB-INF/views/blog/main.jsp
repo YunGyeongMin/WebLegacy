@@ -5,15 +5,15 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Blog</title>
-	<link rel="shortcut icon" type="image/x-icon" href="/img/icon_goodee.png">
+	<link rel="shortcut icon" type="image/x-icon" href="/resources/img/icon_goodee.png">
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="${initParam.bootstrap}css/bootstrap.min.css">
 	<script src="${initParam.jquery}jquery.min.js"></script>
 	<script src="${initParam.bootstrap}js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="/blog/css/commons.css">
-	<script src="/blog/js/commons.js"></script>
+	<link rel="stylesheet" href="/resources/blog/css/commons.css">
+	<script src="/resources/blog/js/commons.js"></script>
 </head>
-<body onload="sessionCheck()">
+<body>
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -54,105 +54,105 @@
 		  <div class="col-sm-3 col-xs-6 cursor-pointer" onclick="location.href = '/blog/MyList';">
 		    <div class="well">
 		     <p>고세민</p>
-		     <img src="/img/java.png" class="img-circle" height="55" width="55" alt="Java">
+		     <img src="/resources/img/java.png" class="img-circle" height="55" width="55" alt="Java">
 		    </div>
 		  </div>
 		  
 		  <div class="col-sm-3  col-xs-6 cursor-pointer">
 		    <div class="well">
 		     <p>김도희</p>
-		     <img src="/img/tomcat.png" class="img-circle" height="55" width="55" alt="WebService">
+		     <img src="/resources/img/tomcat.png" class="img-circle" height="55" width="55" alt="WebService">
 		    </div>
 		  </div>
 		  
 		  <div class="col-sm-3  col-xs-6 cursor-pointer">
 		    <div class="well">
 		     <p>남재규</p>
-		     <img src="/img/mariadb.png" class="img-circle" height="55" width="55" alt="DataBase">
+		     <img src="/resources/img/mariadb.png" class="img-circle" height="55" width="55" alt="DataBase">
 		    </div>
 		  </div>
 		  
 		  <div class="col-sm-3  col-xs-6 cursor-pointer">
 		    <div class="well">
 		     <p>박성민</p>
-		     <img src="/img/javascript.png" class="img-circle" height="55" width="55" alt="JavaScript">
+		     <img src="/resources/img/javascript.png" class="img-circle" height="55" width="55" alt="JavaScript">
 		    </div>
 		  </div>
 		  
 		  <div class="col-sm-3  col-xs-6 cursor-pointer">
 		    <div class="well">
 		     <p>박성진</p>
-		     <img src="/img/tomcat.png" class="img-circle" height="55" width="55" alt="WebService">
+		     <img src="/resources/img/tomcat.png" class="img-circle" height="55" width="55" alt="WebService">
 		    </div>
 		  </div>
 		  
 		  <div class="col-sm-3  col-xs-6 cursor-pointer">
 		    <div class="well">
 		     <p>박찬희</p>
-		     <img src="/img/mariadb.png" class="img-circle" height="55" width="55" alt="DataBase">
+		     <img src="/resources/img/mariadb.png" class="img-circle" height="55" width="55" alt="DataBase">
 		    </div>
 		  </div>
 		  
 		  <div class="col-sm-3  col-xs-6 cursor-pointer">
 		    <div class="well">
 		     <p>배종훈</p>
-		     <img src="/img/javascript.png" class="img-circle" height="55" width="55" alt="JavaScript">
+		     <img src="/resources/img/javascript.png" class="img-circle" height="55" width="55" alt="JavaScript">
 		    </div>
 		  </div>
 		  
 		  <div class="col-sm-3 col-xs-6 cursor-pointer">
 		    <div class="well">
 		     <p>양혜리</p>
-		     <img src="/img/java.png" class="img-circle" height="55" width="55" alt="Java">
+		     <img src="/resources/img/java.png" class="img-circle" height="55" width="55" alt="Java">
 		    </div>
 		  </div>
 		  
 		  <div class="col-sm-3  col-xs-6 cursor-pointer">
 		    <div class="well">
 		     <p>윤경민</p>
-		     <img src="/img/mariadb.png" class="img-circle" height="55" width="55" alt="DataBase">
+		     <img src="/resources/img/mariadb.png" class="img-circle" height="55" width="55" alt="DataBase">
 		    </div>
 		  </div>
 		  
 		  <div class="col-sm-3  col-xs-6 cursor-pointer">
 		    <div class="well">
 		     <p>이규철</p>
-		     <img src="/img/javascript.png" class="img-circle" height="55" width="55" alt="JavaScript">
+		     <img src="/resources/img/javascript.png" class="img-circle" height="55" width="55" alt="JavaScript">
 		    </div>
 		  </div>
 		  
 		  <div class="col-sm-3 col-xs-6 cursor-pointer">
 		    <div class="well">
 		     <p>이해준</p>
-		     <img src="/img/java.png" class="img-circle" height="55" width="55" alt="Java">
+		     <img src="/resources/img/java.png" class="img-circle" height="55" width="55" alt="Java">
 		    </div>
 		  </div>
 		  
 		  <div class="col-sm-3  col-xs-6 cursor-pointer">
 		    <div class="well">
 		     <p>장진용</p>
-		     <img src="/img/tomcat.png" class="img-circle" height="55" width="55" alt="WebService">
+		     <img src="/resources/img/tomcat.png" class="img-circle" height="55" width="55" alt="WebService">
 		    </div>
 		  </div>
 		  
 		  <div class="col-sm-3  col-xs-6 cursor-pointer">
 		    <div class="well">
 		     <p>최재연</p>
-		     <img src="/img/javascript.png" class="img-circle" height="55" width="55" alt="JavaScript">
+		     <img src="/resources/img/javascript.png" class="img-circle" height="55" width="55" alt="JavaScript">
 		    </div>
 		  </div>
 		  
 		  <div class="col-sm-3 col-xs-6 cursor-pointer">
 		    <div class="well">
 		     <p>한충렬</p>
-		     <img src="/img/java.png" class="img-circle" height="55" width="55" alt="Java">
+		     <img src="/resources/img/java.png" class="img-circle" height="55" width="55" alt="Java">
 		    </div>
 		  </div>
 		  
 		  <div class="col-sm-3  col-xs-6 cursor-pointer">
 		    <div class="well">
 		     <p>홍준호</p>
-		     <img src="/img/tomcat.png" class="img-circle" height="55" width="55" alt="WebService">
+		     <img src="/resources/img/tomcat.png" class="img-circle" height="55" width="55" alt="WebService">
 		    </div>
 		  </div>
 		  
