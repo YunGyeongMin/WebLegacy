@@ -29,5 +29,14 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<context-param>
+	    <param-name>bootstrap</param-name>
+	    <param-value>/lib/bootstrap-3.3.2-dist/</param-value>
+	</context-param>
+	<context-param>
+	    <param-name>jquery</param-name>
+	    <param-value>/lib/jquery-3.4.1-dist/</param-value>
+	</context-param>
 
 </web-app>
