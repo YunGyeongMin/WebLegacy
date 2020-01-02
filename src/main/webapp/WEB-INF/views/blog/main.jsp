@@ -7,9 +7,9 @@
 	<title>Blog</title>
 	<link rel="shortcut icon" type="image/x-icon" href="/img/icon_goodee.png">
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="/lib/bootstrap-3.3.2-dist/css/bootstrap.min.css">
-	<script src="/lib/jquery-3.4.1-dist/jquery.min.js"></script>
-	<script src="/lib/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="${initParam.bootstrap}css/bootstrap.min.css">
+	<script src="${initParam.jquery}jquery.min.js"></script>
+	<script src="${initParam.bootstrap}js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="/blog/css/commons.css">
 	<script src="/blog/js/commons.js"></script>
 </head>
