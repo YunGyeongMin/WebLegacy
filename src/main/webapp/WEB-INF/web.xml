@@ -38,5 +38,18 @@
 	    <param-name>jquery</param-name>
 	    <param-value>/lib/jquery-3.4.1-dist/</param-value>
 	</context-param>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error/404</location>
+	</error-page>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/error/405</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error/500</location>
+	</error-page>
 
 </web-app>
