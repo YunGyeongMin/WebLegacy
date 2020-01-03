@@ -8,4 +8,19 @@
   	select 1
   </select>
   
+  <insert id="signUp" parameterType="Map">
+  	INSERT INTO T_USER 
+  		(`id`, `pwd`, `nm`, `email`, `phone`)
+  	VALUES 
+  		(#{id},#{pwd},#{name},#{email},#{phone})
+  </insert>
+  
+  <select id="login" parameterType="kr.gudi.blog.UserBean" resultType="Map">
+  	SELECT * 
+  	  FROM T_USER 
+  	 WHERE delYn = 'N' 
+  	   AND id = #{id} 
+  	   AND pwd = #{pwd}
+  </select>
+  
 </mapper>
