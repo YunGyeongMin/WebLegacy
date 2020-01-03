@@ -3,6 +3,23 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- DB - JDBC 접속 정보 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" 	value="org.mariadb.jdbc.Driver"/>
+		<property name="url" 				value="jdbc:mariadb://192.168.3.240:3306/gdj21"/>
+		<property name="username" 			value="u1"/>
+		<property name="password" 			value="u1"/>
+	</bean>
+	
+	<!-- Mybatis - Factory -->
+	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource"			ref="dataSource" />
+		<property name="mapperLocations"	value="classpath:/sql/*.xml" />
+	</bean>
+	
+	<!-- Mybatis - Session  -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sessionFactory" />
+	</bean>
 		
 </beans>
