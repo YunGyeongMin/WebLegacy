@@ -45,4 +45,8 @@
   		(#{fileName},#{originName})
   </insert>
   
+  <select id="getFile"	parameterType="String" resultType="Map">
+  	SELECT * FROM T_FILES WHERE delYn = 'N' AND `no` = #{no}
+  </select>
+  
 </mapper>

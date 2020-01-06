@@ -13,31 +13,37 @@
 	<link rel="stylesheet" href="/resources/blog/css/commons.css">
 	<script src="/resources/blog/js/commons.js"></script>
 	<script>
+	var formData = new FormData();
 	function previewEvent(input){
    		var reader = new FileReader();
         reader.onload = function (e) {
         	document.getElementById("preview").src = e.target.result;
         }
         reader.readAsDataURL(input.target.files[0]);
+        formData = new FormData();
+        formData.append("file", input.target.files[0]);
 	}
     function imgEvent(){
-    	var input = document.createElement("INPUT");
+    	input = document.createElement("INPUT");
     	input.setAttribute("type", "file");
     	input.onchange = previewEvent;
     	input.click();
+    	
     }
     function btnEvent(){
     	var src = document.getElementById("preview").src;
-    	console.log(src);
-    	var params = {"src" : src};
-    	$.ajax({
-      	  type: "POST",
-     		  url: "/blog/UserImage",
-     		  data: params
-   		}).done(function(a, b, c) {
-   		    console.log(a, b);
-   		    document.getElementById("myImage").src = src;
-   		});
+    	if(document.getElementById("myImage").src != document.getElementById("preview").src){
+	    	$.ajax({
+	      	  type: "POST",
+	     		  url: "/blog/UserImage",
+	     		  data: formData,
+	     		  processData : false,
+	              contentType : false
+	   		}).done(function(a, b, c) {
+	   		    console.log(a, b);
+	   		    document.getElementById("myImage").src = src;
+	   		});
+    	}
     }
     var interests = [];
     function btnEvent2(target){
@@ -165,7 +171,7 @@
 	  
 		<div class="col-sm-3 well">
 		  <div class="well">
-	        <img id="myImage" src="/resources/img/man.png" class="img-circle cursor-pointer" height="65" width="65" alt="Avatar" data-toggle="modal" data-target="#modal">
+	        <img id="myImage" src="/blog/GetFile/${sessionScope.user.img}" class="img-circle cursor-pointer" height="65" width="65" alt="Avatar" data-toggle="modal" data-target="#modal">
 	      </div>
 	    </div>
 	    

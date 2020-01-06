@@ -31,4 +31,8 @@ public class BlogDao {
 		return sqlSession.insert("blog.fileUpload", param);
 	}
 	
+	public Map<String, Object> getFile(String no) {
+		return sqlSession.selectOne("blog.getFile", no);
+	}
+	
 }
