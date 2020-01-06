@@ -28,7 +28,16 @@
     }
     function btnEvent(){
     	var src = document.getElementById("preview").src;
-    	document.getElementById("myImage").src = src;
+    	console.log(src);
+    	var params = {"src" : src};
+    	$.ajax({
+      	  type: "POST",
+     		  url: "/blog/UserImage",
+     		  data: params
+   		}).done(function(a, b, c) {
+   		    console.log(a, b);
+   		    document.getElementById("myImage").src = src;
+   		});
     }
     var interests = [];
     function btnEvent2(target){

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>File</title>
+<script>
+	function btnEvent(){
+		var files = document.getElementById("file").files;
+		console.log(files);
+	}
+</script>
+</head>
+<body>
+	<form action="/blog/UserImage" enctype="multipart/form-data" method="post">
+		<input type="file" name="file" id="file" multiple="multiple">
+		<input type="submit" value="확인">
+	</form>
+</body>
+</html>
