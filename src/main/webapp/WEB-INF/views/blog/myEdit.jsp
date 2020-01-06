@@ -41,7 +41,12 @@
 	              contentType : false
 	   		}).done(function(a, b, c) {
 	   		    console.log(a, b);
-	   		    document.getElementById("myImage").src = src;
+	   		 	if(a > 0){
+// 	   		    	alert("+_+))b");
+	   		    	document.getElementById("myImage").src = src;
+	   		    } else {
+	   		    	alert("'ㅅ'))a");
+	   		    }	   		    
 	   		});
     	}
     }
@@ -316,7 +321,7 @@
 	        	<div class="form-group text-center">
 <!-- 	        		<input type="file" class="form-control" name="userImg" id="userImg" onchange="readURL(this)"> -->
 <!-- 	        		<br> -->
-	        		<img id="preview" src="/resources/img/man.png" alt="your image" class="img-circle cursor-pointer" height="65" width="65" onclick="imgEvent()"/>
+	        		<img id="preview" src="/blog/GetFile/${sessionScope.user.img}" alt="your image" class="img-circle cursor-pointer" height="65" width="65" onclick="imgEvent()"/>
 	        	</div>
 	        </form>
 	      </div>

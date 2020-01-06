@@ -50,14 +50,14 @@ public class ModelController {
 	public void userUpdate(HttpSession session, HttpServletRequest req, HttpServletResponse res) throws Exception {
 		int result = -1;
 		if(util.loginCheck(session)) result = bs.userUpdate(session, util.getParam(req));
-		System.out.println(result);
 		util.sendViewData(res, result + "");
 	}
 	
 	@RequestMapping(value="/UserImage", method=RequestMethod.POST)
-	public void userImage(HttpSession session, HttpServletRequest req, HttpServletResponse res, @RequestParam("file") MultipartFile[] files) throws Exception {
-		int status = bs.fileUpload(files);
-		System.out.println(status);
+	public void userImage(HttpSession session, HttpServletRequest req, HttpServletResponse res, @RequestParam("file") MultipartFile file) throws Exception {
+		int result = -1; 
+		if(util.loginCheck(session)) result = bs.fileUpload(file, session);
+		util.sendViewData(res, result + "");
 	}
 	
 }

@@ -28,7 +28,14 @@ public class BlogDao {
 	}
 	
 	public int fileUpload(Map<String, Object> param) {
-		return sqlSession.insert("blog.fileUpload", param);
+		if(sqlSession.insert("blog.fileUpload", param) > 0) {
+			return sqlSession.selectOne("blog.getUserImg");
+		}
+		return -1;
+	}
+	
+	public int setUserImg(Map<String, Object> param) {
+		return sqlSession.update("blog.setUserImg", param);
 	}
 	
 	public Map<String, Object> getFile(String no) {

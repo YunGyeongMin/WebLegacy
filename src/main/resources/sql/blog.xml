@@ -45,6 +45,19 @@
   		(#{fileName},#{originName})
   </insert>
   
+  <select id="getUserImg" resultType="Integer">
+  	 SELECT 
+			 CASE 
+			 		WHEN MAX(`no`) IS NULL THEN -1 
+					ELSE MAX(`no`) 
+			 END AS userImg 
+	  FROM T_FILES
+  </select>
+  
+  <update id="setUserImg" parameterType="Map">
+  	UPDATE T_USER SET img = ${userImg} WHERE `no` = #{no}
+  </update>
+  
   <select id="getFile"	parameterType="String" resultType="Map">
   	SELECT * FROM T_FILES WHERE delYn = 'N' AND `no` = #{no}
   </select>

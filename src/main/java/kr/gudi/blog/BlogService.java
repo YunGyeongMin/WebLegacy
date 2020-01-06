@@ -44,36 +44,56 @@ public class BlogService {
 	public int userUpdate(HttpSession session, Map<String, Object> paramMap) {
 		Map<String, Object> userMap = (Map<String, Object>) session.getAttribute("user");
 		paramMap.put("no", userMap.get("no"));
+		
+		userMap.put("interests", paramMap.get("interests"));
+		session.setAttribute("user", userMap);
+		
 		return bd.userUpdate(paramMap);
 	}
 	
-	public int fileUpload(MultipartFile[] files) throws Exception {
+	public int fileUpload(MultipartFile file, HttpSession session) throws Exception {
 		
-		for(MultipartFile file : files) {
-			UUID id = UUID.randomUUID();
-			String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."), file.getOriginalFilename().length());
-			String path = ROOT + id + ext;
-			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(path));	
-			
-			paramMap = new HashMap<String, Object>();
-			paramMap.put("fileName", id + ext);
-			paramMap.put("originName", file.getOriginalFilename());
-			int status = bd.fileUpload(paramMap);
-			System.out.println(file.getOriginalFilename() + " : " + status);
-		}
+		UUID id = UUID.randomUUID();
+		String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."), file.getOriginalFilename().length());
+		String path = ROOT + id + ext;
+		FileUtils.copyInputStreamToFile(file.getInputStream(), new File(path));	
 		
-		return 1;
+		paramMap = new HashMap<String, Object>();
+		paramMap.put("fileName", id + ext);
+		paramMap.put("originName", file.getOriginalFilename());
+		int userImg = bd.fileUpload(paramMap);
+		
+		Map<String, Object> userMap = (Map<String, Object>) session.getAttribute("user");
+		paramMap = new HashMap<String, Object>();
+		paramMap.put("userImg", userImg);
+		paramMap.put("no", userMap.get("no"));
+		int status = bd.setUserImg(paramMap);
+		
+		userMap.put("img", userImg);
+		session.setAttribute("user", userMap);
+		
+		return status;
 	}
 	
-	public void getFile(HttpServletResponse res, String no) throws Exception {
-		Map<String, Object> resultMap = bd.getFile(no);
-		if(resultMap != null) {
-			String path = ROOT + resultMap.get("fileName");
-			res.setHeader("Content-Disposition", "inline; filename=\"" + resultMap.get("originName") + "\"");
-			FileUtils.copyFile(new File(path), res.getOutputStream());
-		} else {
-			res.sendRedirect("/blog/");
+	public void getFile(HttpServletResponse res, String no) {
+		try {
+			Map<String, Object> resultMap = bd.getFile(no);
+			if(resultMap != null) {
+				String path = ROOT + resultMap.get("fileName");
+				res.setHeader("Content-Disposition", "inline; filename=\"" + resultMap.get("originName") + "\"");
+				FileUtils.copyFile(new File(path), res.getOutputStream());
+				return;
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+		try {
+			res.sendRedirect("/resources/img/man.png");
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+		
 	}
 
 }
