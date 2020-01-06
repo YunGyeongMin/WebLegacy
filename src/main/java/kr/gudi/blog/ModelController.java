@@ -1,6 +1,5 @@
 package kr.gudi.blog;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,5 +45,14 @@ public class ModelController {
 		else 						 resultCode = "0";
 		util.sendViewData(res, resultCode);
 	}
+	
+	@RequestMapping(value="/UserUpdate", method=RequestMethod.POST)
+	public void userUpdate(HttpSession session, HttpServletRequest req, HttpServletResponse res) throws Exception {
+		int result = -1;
+		if(util.loginCheck(session)) result = bs.userUpdate(session, util.getParam(req));
+		System.out.println(result);
+		util.sendViewData(res, result + "");
+	}
+	
 	
 }

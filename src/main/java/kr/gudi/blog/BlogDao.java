@@ -23,4 +23,8 @@ public class BlogDao {
 		return sqlSession.selectOne("blog.login", paramMap);
 	}
 	
+	public int userUpdate(Map<String, Object> param) {
+		return sqlSession.update("blog.userUpdate", param);
+	}
+	
 }

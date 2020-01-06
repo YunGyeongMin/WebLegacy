@@ -30,5 +30,11 @@ public class BlogService {
 		}		
 		return resultCode;
 	}
+	
+	public int userUpdate(HttpSession session, Map<String, Object> paramMap) {
+		Map<String, Object> userMap = (Map<String, Object>) session.getAttribute("user");
+		paramMap.put("no", userMap.get("no"));
+		return bd.userUpdate(paramMap);
+	}
 
 }

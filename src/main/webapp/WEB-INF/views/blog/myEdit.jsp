@@ -68,7 +68,7 @@
     		"email": document.getElementById("email").value,
     		"phone": document.getElementById("phone").value,
     		"interests": ""
-    	};
+    	};    	
     	if(interests.length > 0) {
     		params.interests = JSON.stringify(interests);
     	}
@@ -77,10 +77,44 @@
     		params.pwd = pwd;
     	}
     	console.log(params);
+    	
+    	$.ajax({
+    	  type: "POST",
+   		  url: "/blog/UserUpdate",
+   		  data: params
+   		}).done(function(a, b, c) {
+   		    if(a > 0){
+   		    	alert("+_+))b");
+   		    	interestsView();
+   		    } else {
+   		    	alert("'ㅅ'))a");
+   		    }
+   		});
+    	
+    }
+    function interestsView(){
+    	var list = document.getElementsByClassName("txt-box");
+    	for(var i = 0; i < list.length; i++){
+    		for(var j = 0; j < interests.length; j++){
+    			if(list[i].innerText == interests[j]){
+    				list[i].classList.add("txt-active");
+    				break;
+    			}
+    		}
+    	}
+    }
+    function onload(){
+    	interests = '${sessionScope.user.interests}';
+    	if(interests == ""){
+    		interests = [];
+    	} else {
+    		interests = JSON.parse(interests);
+    	}
+    	interestsView();
     }
 	</script>
 </head>
-<body onload="sessionCheck()">
+<body onload="sessionCheck(); onload();">
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">

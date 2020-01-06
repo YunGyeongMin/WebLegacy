@@ -26,4 +26,16 @@
   	   AND pwd = #{pwd}
   </select>
   
+  <update id="userUpdate" parameterType="Map">
+  	UPDATE T_USER SET 
+  		<if test="pwd != null">
+  	 	  `pwd`   = #{pwd},
+  	 	</if>
+	 	  `nm`    = #{name},
+	 	  `email` = #{email},
+	 	  `phone` = #{phone},
+	 	  `interests` = #{interests}
+	WHERE `no` 	  = #{no}
+  </update>
+  
 </mapper>
