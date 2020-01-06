@@ -1,5 +1,8 @@
 package kr.gudi.blog;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,37 +12,39 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.gudi.util.HttpUtil;
+
 @Controller
 @RequestMapping(value="/blog")
 public class ModelController {
 	
-	@Autowired
-	BlogService bs;
+	@Autowired private BlogService bs;
+	@Autowired private HttpUtil util;
+	private String resultCode;
 
 	@RequestMapping(value="/SignUp", method=RequestMethod.POST)
 	public String signUp(HttpSession session, HttpServletRequest req, HttpServletResponse res) throws Exception {
-		boolean status = bs.signUp(session, req, res);
-		if(status) return "redirect:/blog/Login";
-		else       return "redirect:/blog/SignUp";
+		int status = bs.signUp(util.getParam(req));
+		if(status > 0) return "redirect:/blog/Login";
+		else       	   return "redirect:/blog/SignUp";
 	}
 	
 	@RequestMapping(value="/Login", method=RequestMethod.POST)
 	public void login(HttpSession session, HttpServletRequest req, HttpServletResponse res) throws Exception {
-		bs.login(session, req, res);
+		util.sendViewData(res, bs.login(session, util.getParam(req)));		
 	}
 	
 	@RequestMapping(value="/Logout", method=RequestMethod.POST)
 	public void logout(HttpSession session, HttpServletResponse res) throws Exception {
 		session.invalidate();
-		res.getWriter().print("1");
+		util.sendViewData(res, "1");
 	}
 	
 	@RequestMapping(value="/LoginCheck", method=RequestMethod.POST)
 	public void loginCheck(HttpSession session, HttpServletRequest req, HttpServletResponse res) throws Exception {
-		req.setCharacterEncoding("UTF-8");
-		Object id = session.getAttribute("id");
-		if(id == null) res.getWriter().print("0");
-		else           res.getWriter().print("1");
+		if(util.loginCheck(session)) resultCode = "1"; 
+		else 						 resultCode = "0";
+		util.sendViewData(res, resultCode);
 	}
 	
 }

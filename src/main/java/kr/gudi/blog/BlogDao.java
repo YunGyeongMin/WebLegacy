@@ -9,20 +9,18 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class BlogDao {
 
-	@Autowired
-	SqlSession sqlSession;
+	@Autowired private SqlSession sqlSession;
 	
-	public void test() {
-		int result = sqlSession.selectOne("sql.test");
-		System.out.println(result);
+	public int userCheck(Map<String, Object> param) {
+		return sqlSession.selectOne("blog.userCheck", param);
 	}
 	
 	public int signUp(Map<String, Object> param) {
-		return sqlSession.insert("sql.signUp", param);
+		return sqlSession.insert("blog.signUp", param);
 	}
 	
-	public Map<String, Object> login(UserBean ub) {
-		return sqlSession.selectOne("sql.login", ub);
+	public Map<String, Object> login(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("blog.login", paramMap);
 	}
 	
 }

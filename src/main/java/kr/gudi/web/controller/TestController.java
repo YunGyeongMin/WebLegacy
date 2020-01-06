@@ -16,12 +16,4 @@ public class TestController {
 		return no;
 	}
 	
-	@Autowired
-	BlogDao bd;
-	
-	@RequestMapping("/db")
-	public void db() {
-		bd.test();
-	}
-	
 }

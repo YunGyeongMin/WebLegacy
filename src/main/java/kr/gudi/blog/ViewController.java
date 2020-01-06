@@ -7,23 +7,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.gudi.util.HttpUtil;
+
 @Controller
 @RequestMapping("/blog")
 public class ViewController {
 	
-	@Autowired
-	BlogService bs;
-	
+	@Autowired private HttpUtil util;
 	private String root = "blog/";
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String root() {
-		return root + "main";
+		return root.concat("main");
 	}
 	
 	@RequestMapping(value="/Login", method=RequestMethod.GET)
 	public String login() {
-		return root + "login";
+		return root.concat("login");
 	}
 	
 	@RequestMapping(value="/Logout", method=RequestMethod.GET)
@@ -34,8 +34,8 @@ public class ViewController {
 	
 	@RequestMapping(value="/Message", method=RequestMethod.GET)
 	public String message(HttpSession session) {
-		if(bs.loginCheck(session)) {
-			return root + "message";
+		if(util.loginCheck(session)) {
+			return root.concat("message");
 		} else {
 			return "redirect:/blog/Login";
 		}
@@ -43,8 +43,8 @@ public class ViewController {
 	
 	@RequestMapping(value="/MyEdit", method=RequestMethod.GET)
 	public String myEdit(HttpSession session) {
-		if(bs.loginCheck(session)) {
-			return root + "myEdit";
+		if(util.loginCheck(session)) {
+			return root.concat("myEdit");
 		} else {
 			return "redirect:/blog/Login";
 		}
@@ -52,17 +52,17 @@ public class ViewController {
 	
 	@RequestMapping(value="/MyList", method=RequestMethod.GET)
 	public String myList() {
-		return root + "myList";
+		return root.concat("myList");
 	}
 	
 	@RequestMapping(value="/Profile", method=RequestMethod.GET)
 	public String profile() {
-		return root + "profile";
+		return root.concat("profile");
 	}
 	
 	@RequestMapping(value="/SignUp", method=RequestMethod.GET)
 	public String signUp() {
-		return root + "signUp";
+		return root.concat("signUp");
 	}
 
 }

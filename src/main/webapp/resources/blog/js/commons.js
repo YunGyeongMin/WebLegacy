@@ -29,11 +29,11 @@ function logout(){
 	    if (this.readyState == 4 && this.status == 200) {
 	      if(this.responseText == 1){
 	    	  var 부모 = document.getElementsByClassName("nav")[1].children;
-	    	  부모[0].style.display = "none";
-	    	  부모[1].style.display = "none";
+	    	  부모[0].classList.add("hidden");
+	    	  부모[1].classList.add("hidden");
 	    	  
-	    	  부모[2].style.display = "block";
-	    	  부모[3].style.display = "block";
+	    	  부모[2].classList.remove("hidden");
+	    	  부모[3].classList.remove("hidden");
 	      }
 	    }
 	});
@@ -46,17 +46,17 @@ function sessionCheck(){
 	    if (this.readyState == 4 && this.status == 200) {
 	      var 부모 = document.getElementsByClassName("nav")[1].children;
 	      if(this.responseText == 1){
-	    	  부모[0].style.display = "block";
-	    	  부모[1].style.display = "block";
+	    	  부모[0].classList.remove("hidden");
+	    	  부모[1].classList.remove("hidden");
 	    	  
-	    	  부모[2].style.display = "none";
-	    	  부모[3].style.display = "none";
+	    	  부모[2].classList.add("hidden");
+	    	  부모[3].classList.add("hidden");
 	      } else {
-	    	  부모[0].style.display = "none";
-	    	  부모[1].style.display = "none";
+	    	  부모[0].classList.add("hidden");
+	    	  부모[1].classList.add("hidden");
 	    	  
-	    	  부모[2].style.display = "block";
-	    	  부모[3].style.display = "block";
+	    	  부모[2].classList.remove("hidden");
+	    	  부모[3].classList.remove("hidden");
 	      }
 	    }
 	});

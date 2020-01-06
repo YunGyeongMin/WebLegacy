@@ -1,13 +1,8 @@
 package kr.gudi.blog;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,83 +10,25 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BlogService {
-	
-//	public static List<Map<String, Object>> userList = new ArrayList<Map<String,Object>>();
 
-	@Autowired
-	BlogDao bd;
+	@Autowired BlogDao bd;
+	private String resultCode;
+	private Map<String, Object> resultMap;
 	
-	public boolean signUp(HttpSession session, HttpServletRequest req, HttpServletResponse res) {
-		try {
-			req.setCharacterEncoding("UTF-8");
-			Map<String, Object> paramMap = new HashMap<String, Object>();
-			Enumeration<String> enume = req.getParameterNames();
-			while (enume.hasMoreElements()) {
-			       String paramName = enume.nextElement();
-			       String paramValue = req.getParameter(paramName);
-			       paramMap.put(paramName, paramValue);
-			}
-//			BlogService.userList.add(paramMap);
-			bd.signUp(paramMap);
-			
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+	public int signUp(Map<String, Object> paramMap) {
+		if(bd.userCheck(paramMap) > 0) return 0;
+		else		  				   return bd.signUp(paramMap);
 	}
 	
-	public void login(HttpSession session, HttpServletRequest req, HttpServletResponse res) throws Exception {
-		req.setCharacterEncoding("UTF-8");		
-		String id = req.getParameter("id");
-		String pwd = req.getParameter("pwd");
-		
-		UserBean ub = new UserBean();
-		ub.setId(id);
-		ub.setPwd(pwd);
-		
-		Map<String, Object> resultMap = bd.login(ub);
-		
+	public String login(HttpSession session, Map<String, Object> paramMap) throws Exception {
+		resultMap = bd.login(paramMap);		
 		if(resultMap == null) {
-			res.getWriter().print("2");
+			resultCode = "0";
 		} else {
-			res.getWriter().print("1");
-			session.setAttribute("id", id);
-			session.setAttribute("name", resultMap.get("nm"));
-		}
-		
-//		for(int i = 0; i < BlogService.userList.size(); i++) {
-//			Map<String, Object> userMap = BlogService.userList.get(i);
-//			Object userId = userMap.get("id");
-//			Object userPwd = userMap.get("pwd");
-//			Object UserName = userMap.get("name");
-//			
-//			if(userId.equals(id)) {
-//				if(userPwd.equals(pwd)) {
-//					res.getWriter().print("1");
-//					session.setAttribute("id", id);
-//					session.setAttribute("name", UserName);
-//					return;
-//				}
-//			}
-//			
-//		}
-//		res.getWriter().print("2");
-				
-	}
-	
-	public boolean loginCheck(HttpSession session) {
-		try {
-			Object id = session.getAttribute("id");
-			if(id == null) {
-				System.out.println("id 없음");
-				return false;
-			}
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+			session.setAttribute("user", resultMap);
+			resultCode = "1";
+		}		
+		return resultCode;
 	}
 
 }

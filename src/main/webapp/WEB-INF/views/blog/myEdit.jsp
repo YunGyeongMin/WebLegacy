@@ -30,6 +30,54 @@
     	var src = document.getElementById("preview").src;
     	document.getElementById("myImage").src = src;
     }
+    var interests = [];
+    function btnEvent2(target){
+    	var check = true;
+    	for(var i = 0; i < target.classList.length; i++){
+    		if(target.classList[i] == "txt-active") {
+    			check = false;
+    			break;
+    		}
+    	}
+    	if(check) {
+    		target.classList.add("txt-active");
+    	} else {
+    		target.classList.remove("txt-active");
+    	}
+    	interController(target);
+    }
+    function interController(target){
+    	var check = true;
+    	var index = -1;
+    	for(var i = 0; i < interests.length; i++){
+    		if(interests[i] == target.innerText) {
+    			check = false;
+    			index = i;
+    			break;
+    		}
+    	}
+    	if(check) {
+    		interests[interests.length] = target.innerText;
+    	} else {
+    		interests.splice(index, 1);
+    	}
+    }
+    function update(){
+    	var params = {
+    		"name": document.getElementById("name").value,
+    		"email": document.getElementById("email").value,
+    		"phone": document.getElementById("phone").value,
+    		"interests": ""
+    	};
+    	if(interests.length > 0) {
+    		params.interests = JSON.stringify(interests);
+    	}
+    	var pwd = document.getElementById("pwd").value;
+    	if(pwd != ""){
+    		params.pwd = pwd;
+    	}
+    	console.log(params);
+    }
 	</script>
 </head>
 <body onload="sessionCheck()">
@@ -60,10 +108,10 @@
 	        </div>
 	      </form>
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="/blog/MyEdit"><span class="glyphicon glyphicon-user"></span> ${sessionScope.name}</a></li>
-	        <li><a href="/blog/Logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-	        <li><a href="/blog/SignUp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      		<li><a href="/blog/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	        <li class="hidden"><a href="/blog/MyEdit"><span class="glyphicon glyphicon-user"></span> ${sessionScope.user.nm}</a></li>
+	        <li class="hidden"><a href="javascript:logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+	        <li class="hidden"><a href="/blog/SignUp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      		<li class="hidden"><a href="/blog/Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 	      </ul>
 	    </div>
 	  </div>
@@ -79,24 +127,24 @@
 	    </div>
 	    
 	    <div class="col-sm-9">
-			<form class="form-horizontal">
+			<form class="form-horizontal" onsubmit="return false;">
 				<h2>Information</h2>
 				<div class="form-group">
 			    	<label class="control-label col-sm-2" for="name">Name:</label>
 			    	<div class="col-sm-10">
-			      		<input type="text" class="form-control" id="name" value="고세민" required="required">
+			      		<input type="text" class="form-control" id="name" value="${sessionScope.user.nm}" required="required">
 			    	</div>
 			  	</div>
 				<div class="form-group">
 			    	<label class="control-label col-sm-2" for="email">Email:</label>
 			    	<div class="col-sm-10">
-			      		<input type="email" class="form-control" id="email" value="gsm@goodee.co.kr" required="required">
+			      		<input type="email" class="form-control" id="email" value="${sessionScope.user.email}" required="required">
 			    	</div>
 			  	</div>
 			  	<div class="form-group">
 			    	<label class="control-label col-sm-2" for="phone">Phone Cell:</label>
 			    	<div class="col-sm-10">
-			      		<input type="tel" class="form-control" id="phone" value="010-1234-5678" required="required">
+			      		<input type="tel" class="form-control" id="phone" value="${sessionScope.user.phone}">
 			    	</div>
 			  	</div>
 			  	<div class="form-group">
@@ -109,89 +157,89 @@
 				  	<h2>Interests</h2>
 				  	<div class="row">
 				  		<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>C</h4>
 					        </div>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>C++</h4>
 					        </div>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>C#</h4>
 					        </div>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box txt-active">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>Java</h4>
 					        </div>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box txt-active">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>WebService</h4>
 					        </div>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box txt-active">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>DataBase</h4>
 					        </div>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>SQL</h4>
 					        </div>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box txt-active">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>HTML</h4>
 					        </div>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box txt-active">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>CSS</h4>
 					        </div>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box txt-active">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>JavaScript</h4>
 					        </div>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>Python</h4>
 					        </div>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>Rube</h4>
 					        </div>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>Go</h4>
 					        </div>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>PHP</h4>
 					        </div>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>ASP</h4>
 					        </div>
 						</div>
 						<div class="col-xs-6 col-sm-4 col-md-3 cursor-pointer">
-							<div class="txt-box">
+							<div class="txt-box" onclick="btnEvent2(this)">
 						        <h4>JSP</h4>
 					        </div>
 						</div>
 					</div>
 				</div>
 			  	<div class="form-group button-body">
-			      	<button type="submit" class="btn btn-success btn-block font-default">수정</button>
+			      	<button type="submit" class="btn btn-success btn-block font-default" onclick="update()">수정</button>
 				</div>
 			</form>
 		  
