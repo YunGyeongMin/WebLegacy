@@ -38,4 +38,11 @@
 	WHERE `no` 	  = #{no}
   </update>
   
+  <insert id="fileUpload" parameterType="Map">
+  	INSERT INTO T_FILES 
+  		(`fileName`, `originName`) 
+  	VALUES 
+  		(#{fileName},#{originName})
+  </insert>
+  
 </mapper>

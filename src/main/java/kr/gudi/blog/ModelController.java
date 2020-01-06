@@ -2,13 +2,16 @@ package kr.gudi.blog;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,14 +65,8 @@ public class ModelController {
 	
 	@RequestMapping(value="/UserImage", method=RequestMethod.POST)
 	public void userImage(HttpSession session, HttpServletRequest req, HttpServletResponse res, @RequestParam("file") MultipartFile[] files) throws Exception {
-		String root = "D:/GDJ21/IDE/workspace/WebLegacy/src/main/webapp/resources/files/";
-		for(MultipartFile file : files) {
-			String path = root + file.getOriginalFilename();
-			File f = new File(path);
-			OutputStream os = new FileOutputStream(f);
-			os.write(file.getBytes());
-			os.close();
-		}
+		int status = bs.fileUpload(files);
+		System.out.println(status);
 	}
 	
 }

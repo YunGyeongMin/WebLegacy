@@ -27,4 +27,8 @@ public class BlogDao {
 		return sqlSession.update("blog.userUpdate", param);
 	}
 	
+	public int fileUpload(Map<String, Object> param) {
+		return sqlSession.insert("blog.fileUpload", param);
+	}
+	
 }
