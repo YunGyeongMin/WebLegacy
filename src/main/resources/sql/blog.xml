@@ -39,6 +39,14 @@
   </update>
   
   <insert id="fileUpload" parameterType="Map">
+  	<selectKey keyProperty="userImg" resultType="Integer" order="AFTER">
+  	 SELECT 
+			 CASE 
+			 		WHEN MAX(`no`) IS NULL THEN -1 
+					ELSE MAX(`no`) 
+			 END AS userImg 
+	  FROM T_FILES
+  	</selectKey>
   	INSERT INTO T_FILES 
   		(`fileName`, `originName`) 
   	VALUES 
@@ -60,6 +68,24 @@
   
   <select id="getFile"	parameterType="String" resultType="Map">
   	SELECT * FROM T_FILES WHERE delYn = 'N' AND `no` = #{no}
+  </select>
+  
+  <insert id="setMessage" parameterType="Map">
+  	INSERT INTO T_COMMENT (`uNo`, `desc`) VALUES (#{no},#{comment})
+  </insert>
+  
+  <select id="getMessage" parameterType="Integer" resultType="Map">
+  	SELECT c.no, c.desc, u.nm, u.img
+	  FROM T_COMMENT AS c
+	  LEFT OUTER JOIN T_USER AS u
+	  ON (c.uNo = u.no)
+	 WHERE c.delYn = 'N'
+	 ORDER BY c.no desc
+	 LIMIT #{paging}, 3
+  </select>
+  
+  <select id="getPagingCnt" resultType="Integer">
+  	SELECT CEIL(COUNT(*) / 3) FROM T_COMMENT WHERE delYn = 'N'
   </select>
   
 </mapper>

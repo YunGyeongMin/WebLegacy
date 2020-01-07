@@ -60,4 +60,11 @@ public class ModelController {
 		util.sendViewData(res, result + "");
 	}
 	
+	@RequestMapping(value="/SetMessage", method=RequestMethod.POST)
+	public String setMessage(HttpSession session, HttpServletRequest req) throws Exception {
+		int result = -1;
+		if(util.loginCheck(session)) result = bs.setMessage(session, util.getParam(req));
+		return "redirect:/blog/Message";
+	}
+	
 }

@@ -52,9 +52,9 @@
 	  
 	<div class="container text-center">    
     	<h1>Recommend</h1>
-		<form>
+		<form action="/blog/SetMessage" method="post">
 			<div class="form-group">
-		      <textarea class="form-control txt-none font-default" rows="10" id="comment"></textarea>
+		      <textarea class="form-control txt-none font-default" rows="10" id="comment" name="comment"></textarea>
 		    </div>
 		    <div class="form-group">
 		      	<button type="submit" class="btn btn-success btn-block font-default">저장</button>

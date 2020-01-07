@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -94,6 +96,29 @@ public class BlogService {
 			e2.printStackTrace();
 		}
 		
+	}
+	
+	public int setMessage(HttpSession session, Map<String, Object> paramMap) {
+		Map<String, Object> userMap = (Map<String, Object>) session.getAttribute("user");
+		paramMap.put("no", userMap.get("no"));
+		
+		String comment = paramMap.get("comment").toString();
+		comment = comment.replace("\n", "<br>");
+		paramMap.put("comment", comment);
+		
+		return bd.setMessage(paramMap);
+	}
+	
+	public int getMessage(Map<String, Object> paramMap, Model model) {
+		Object paging = paramMap.get("paging");
+		if(paging == null) {
+			paging = 0;
+		} else {
+			paging = (Integer.parseInt(paging.toString()) - 1) * 3;
+		}
+		model.addAttribute("rows", bd.getMessage(Integer.parseInt(paging.toString())));
+		model.addAttribute("paging", bd.getPagingCnt());
+		return 1;
 	}
 
 }

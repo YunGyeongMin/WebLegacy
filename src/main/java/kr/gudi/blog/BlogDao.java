@@ -1,5 +1,6 @@
 package kr.gudi.blog;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -29,7 +30,7 @@ public class BlogDao {
 	
 	public int fileUpload(Map<String, Object> param) {
 		if(sqlSession.insert("blog.fileUpload", param) > 0) {
-			return sqlSession.selectOne("blog.getUserImg");
+			return (int) param.get("userImg");
 		}
 		return -1;
 	}
@@ -40,6 +41,18 @@ public class BlogDao {
 	
 	public Map<String, Object> getFile(String no) {
 		return sqlSession.selectOne("blog.getFile", no);
+	}
+	
+	public int setMessage(Map<String, Object> param) {
+		return sqlSession.insert("blog.setMessage", param);
+	}
+	
+	public List<Map<String, Object>> getMessage(int paging) {
+		return sqlSession.selectList("blog.getMessage", paging);
+	}
+	
+	public int getPagingCnt() {
+		return sqlSession.selectOne("blog.getPagingCnt");
 	}
 	
 }
