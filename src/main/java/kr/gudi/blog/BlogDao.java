@@ -47,8 +47,8 @@ public class BlogDao {
 		return sqlSession.insert("blog.setMessage", param);
 	}
 	
-	public List<Map<String, Object>> getMessage(int paging) {
-		return sqlSession.selectList("blog.getMessage", paging);
+	public List<Map<String, Object>> getMessage(int index) {
+		return sqlSession.selectList("blog.getMessage", index);
 	}
 	
 	public int getPagingCnt() {

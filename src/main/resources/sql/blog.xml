@@ -81,7 +81,7 @@
 	  ON (c.uNo = u.no)
 	 WHERE c.delYn = 'N'
 	 ORDER BY c.no desc
-	 LIMIT #{paging}, 3
+	 LIMIT #{index}, 3
   </select>
   
   <select id="getPagingCnt" resultType="Integer">

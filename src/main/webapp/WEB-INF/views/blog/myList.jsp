@@ -109,18 +109,29 @@
 	      
 			<ul class="pagination">
 <% 
-	int paging = Integer.parseInt(request.getAttribute("paging").toString());
-		if(paging > 2) {
+	int size = Integer.parseInt(request.getAttribute("size").toString());
+	int point = Integer.parseInt(request.getAttribute("point").toString());
+	int paging = Integer.parseInt(request.getParameter("paging"));
+	int end = (point + 5);
+	String active = "active";
+	if(size < end) end = size+1;
+		if(point > 1) {
 %>
-				<li class="previous"><a href="#">Previous</a></li>
+				<li class="previous"><a href="/blog/MyList?paging=<%=(point-5)%>">Previous</a></li>
 <% 		}
-		for(int i = 1; i <= paging; i++) {%>
-			   	<li><a href="/blog/MyList?paging=<%=i%>"><%=i%></a></li>
-<% 		}
-
-		if(paging > 2) {
+		for(int i = point; i < end; i++) {
+			if(paging == i){
+				active = "active";
+			} else {
+				active = "";
+			}
 %>
-			   	<li class="next"><a href="#">Next</a></li>
+			   	<li class="<%=active%>"><a href="/blog/MyList?paging=<%=i%>"><%=i%></a></li>
+<% 		
+		}
+		if(size > end) {
+%>
+			   	<li class="next"><a href="/blog/MyList?paging=<%=(point+5)%>">Next</a></li>
 <% 		}%>
 			</ul>
 		  

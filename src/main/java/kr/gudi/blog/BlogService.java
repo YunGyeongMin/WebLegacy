@@ -111,13 +111,20 @@ public class BlogService {
 	
 	public int getMessage(Map<String, Object> paramMap, Model model) {
 		Object paging = paramMap.get("paging");
+		System.out.println(paging);
+		int index = 0;
 		if(paging == null) {
-			paging = 0;
+			paging = 1;
 		} else {
-			paging = (Integer.parseInt(paging.toString()) - 1) * 3;
+			index = (Integer.parseInt(paging.toString()) - 1) * 3;
+			if(Integer.parseInt(paging.toString()) % 5 != 1) {
+				double a = Integer.parseInt(paging.toString());
+				paging = ((int) Math.ceil(a / 5) * 5) - 4;
+			}
 		}
-		model.addAttribute("rows", bd.getMessage(Integer.parseInt(paging.toString())));
-		model.addAttribute("paging", bd.getPagingCnt());
+		model.addAttribute("rows", bd.getMessage(index));
+		model.addAttribute("size", bd.getPagingCnt());
+		model.addAttribute("point", paging);
 		return 1;
 	}
 
