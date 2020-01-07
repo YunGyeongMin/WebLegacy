@@ -55,4 +55,12 @@ public class BlogDao {
 		return sqlSession.selectOne("blog.getPagingCnt");
 	}
 	
+	public List<Map<String, Object>> getUserList(){
+		return sqlSession.selectList("blog.getUserList");
+	}
+	
+	public Map<String, Object> getUser(Map<String, Object> param){
+		return sqlSession.selectOne("blog.getUser", param);
+	}
+	
 }

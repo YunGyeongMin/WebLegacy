@@ -22,7 +22,8 @@ public class ViewController {
 	private String root = "blog/";
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String root() {
+	public String root(Model model) {
+		bs.getUserList(model);
 		return root.concat("main");
 	}
 	

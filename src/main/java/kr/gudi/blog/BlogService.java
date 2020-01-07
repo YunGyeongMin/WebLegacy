@@ -125,6 +125,12 @@ public class BlogService {
 		model.addAttribute("rows", bd.getMessage(index));
 		model.addAttribute("size", bd.getPagingCnt());
 		model.addAttribute("point", paging);
+		model.addAttribute("user", bd.getUser(paramMap));
+		return 1;
+	}
+	
+	public int getUserList(Model model) {
+		model.addAttribute("rows", bd.getUserList());		
 		return 1;
 	}
 

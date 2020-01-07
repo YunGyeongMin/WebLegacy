@@ -88,4 +88,14 @@
   	SELECT CEIL(COUNT(*) / 3) FROM T_COMMENT WHERE delYn = 'N'
   </select>
   
+  <select id="getUserList" resultType="Map">
+  	SELECT `no`, `nm`, `img`
+  	  FROM T_USER WHERE delYn = 'N'
+  </select>
+  
+  <select id="getUser" parameterType="Map" resultType="Map">
+  	SELECT `no`, `nm`, `img`, `interests`
+      FROM T_USER WHERE delYn = 'N' AND `no` = #{user}
+  </select>
+  
 </mapper>

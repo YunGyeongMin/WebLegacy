@@ -148,7 +148,7 @@
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav">
 	      	<li><a href="/blog/">Home</a></li>
-	      	<li><a href="/blog/MyList">고세민</a></li>
+	      	<li><a href="/blog/MyList?user=${sessionScope.user.no}">${sessionScope.user.nm}</a></li>
 	      	<li class="active"><a href="#">Edit</a></li>
 	      </ul>
 	      <form class="navbar-form navbar-right" role="search">

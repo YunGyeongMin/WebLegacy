@@ -1,3 +1,6 @@
+<%@page import="net.sf.json.JSONArray"%>
+<%@page import="net.sf.json.JSONObject"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -16,6 +19,12 @@
 	<script src="/resources/blog/js/commons.js"></script>
 </head>
 <body onload="sessionCheck()">
+<%
+	Map<String, Object> userMap = (Map<String, Object>) request.getAttribute("user");
+	if(userMap == null){
+		userMap = new HashMap<String, Object>();
+	}	
+%>
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -29,7 +38,7 @@
 	    <div class="collapse navbar-collapse" id="myNavbar">
 	      <ul class="nav navbar-nav">
 	      	<li><a href="/blog/">Home</a></li>
-	      	<li class="active"><a href="#">고세민</a></li>
+	      	<li class="active"><a href="#"><%=userMap.get("nm") %></a></li>
 	      </ul>
 	      <form class="navbar-form navbar-right" role="search">
 	        <div class="form-group input-group">
@@ -57,17 +66,42 @@
 		<div class="col-sm-3 well">
 		  <div class="well">
 	        <p><a href="/blog/Profile">Profile</a></p>
-	        <img src="/resources/img/man.png" class="img-circle" height="65" width="65" alt="Avatar">
+	        <img src="/blog/GetFile/<%= userMap.get("img")%>" class="img-circle" height="65" width="65" alt="Avatar">
 	      </div>
 	      <div class="well">
 	        <p><a href="#">Interests</a></p>
 	        <p>
-	          <span class="label label-default">Java</span>
-	          <span class="label label-primary">WebService</span>
-	          <span class="label label-success">DataBase</span>
-	          <span class="label label-info">HTML</span>
-	          <span class="label label-warning">CSS</span>
-	          <span class="label label-danger">JavaScript</span>
+<% 
+		String interests = userMap.get("interests").toString();
+		JSONArray jo = new JSONArray();
+		if(!"".equals(interests)){
+			jo = JSONArray.fromObject(interests);		
+		}		
+		String label = "label-default";
+		for(int i = 0; i < jo.size(); i++) {
+			switch(i % 6){
+				case 1:
+					label = "label-primary";
+					break;
+				case 2:
+					label = "label-success";
+					break;
+				case 3:
+					label = "label-info";
+					break;
+				case 4:
+					label = "label-warning";
+					break;
+				case 5:
+					label = "label-danger";
+					break;
+				default :
+					label = "label-default";
+					break;
+			}
+%>
+	          <span class="label <%=label%>"><%=jo.getString(i) %></span>
+<% 		}%>
 	        </p>
 	      </div>
 	      <div class="well">
@@ -111,7 +145,10 @@
 <% 
 	int size = Integer.parseInt(request.getAttribute("size").toString());
 	int point = Integer.parseInt(request.getAttribute("point").toString());
-	int paging = Integer.parseInt(request.getParameter("paging"));
+	int paging = 1;
+	if(request.getParameter("paging") != null) {
+		paging = Integer.parseInt(request.getParameter("paging"));
+	}
 	int end = (point + 5);
 	String active = "active";
 	if(size < end) end = size+1;

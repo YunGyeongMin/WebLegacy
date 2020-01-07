@@ -1,3 +1,5 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html oncontextmenu="return false">
@@ -50,119 +52,18 @@
 	  
 	<div class="container text-center">    
 		<div class="row">
-		
-		  <div class="col-sm-3 col-xs-6 cursor-pointer" onclick="location.href = '/blog/MyList';">
+<% 
+		List<Map<String, Object>> rows = (List<Map<String, Object>>) request.getAttribute("rows");
+		for(int i = 0; i < rows.size(); i++){
+%>
+		  <div class="col-sm-3 col-xs-6 cursor-pointer" onclick="location.href = '/blog/MyList?user=<%=rows.get(i).get("no")%>';">
 		    <div class="well">
-		     <p>고세민</p>
-		     <img src="/resources/img/java.png" class="img-circle" height="55" width="55" alt="Java">
+		     <p><%=rows.get(i).get("nm") %></p>
+		     <img src="/blog/GetFile/<%= rows.get(i).get("img")%>" class="img-circle" height="55" width="55" alt="Java">
 		    </div>
 		  </div>
-		  
-		  <div class="col-sm-3  col-xs-6 cursor-pointer">
-		    <div class="well">
-		     <p>김도희</p>
-		     <img src="/resources/img/tomcat.png" class="img-circle" height="55" width="55" alt="WebService">
-		    </div>
-		  </div>
-		  
-		  <div class="col-sm-3  col-xs-6 cursor-pointer">
-		    <div class="well">
-		     <p>남재규</p>
-		     <img src="/resources/img/mariadb.png" class="img-circle" height="55" width="55" alt="DataBase">
-		    </div>
-		  </div>
-		  
-		  <div class="col-sm-3  col-xs-6 cursor-pointer">
-		    <div class="well">
-		     <p>박성민</p>
-		     <img src="/resources/img/javascript.png" class="img-circle" height="55" width="55" alt="JavaScript">
-		    </div>
-		  </div>
-		  
-		  <div class="col-sm-3  col-xs-6 cursor-pointer">
-		    <div class="well">
-		     <p>박성진</p>
-		     <img src="/resources/img/tomcat.png" class="img-circle" height="55" width="55" alt="WebService">
-		    </div>
-		  </div>
-		  
-		  <div class="col-sm-3  col-xs-6 cursor-pointer">
-		    <div class="well">
-		     <p>박찬희</p>
-		     <img src="/resources/img/mariadb.png" class="img-circle" height="55" width="55" alt="DataBase">
-		    </div>
-		  </div>
-		  
-		  <div class="col-sm-3  col-xs-6 cursor-pointer">
-		    <div class="well">
-		     <p>배종훈</p>
-		     <img src="/resources/img/javascript.png" class="img-circle" height="55" width="55" alt="JavaScript">
-		    </div>
-		  </div>
-		  
-		  <div class="col-sm-3 col-xs-6 cursor-pointer">
-		    <div class="well">
-		     <p>양혜리</p>
-		     <img src="/resources/img/java.png" class="img-circle" height="55" width="55" alt="Java">
-		    </div>
-		  </div>
-		  
-		  <div class="col-sm-3  col-xs-6 cursor-pointer">
-		    <div class="well">
-		     <p>윤경민</p>
-		     <img src="/resources/img/mariadb.png" class="img-circle" height="55" width="55" alt="DataBase">
-		    </div>
-		  </div>
-		  
-		  <div class="col-sm-3  col-xs-6 cursor-pointer">
-		    <div class="well">
-		     <p>이규철</p>
-		     <img src="/resources/img/javascript.png" class="img-circle" height="55" width="55" alt="JavaScript">
-		    </div>
-		  </div>
-		  
-		  <div class="col-sm-3 col-xs-6 cursor-pointer">
-		    <div class="well">
-		     <p>이해준</p>
-		     <img src="/resources/img/java.png" class="img-circle" height="55" width="55" alt="Java">
-		    </div>
-		  </div>
-		  
-		  <div class="col-sm-3  col-xs-6 cursor-pointer">
-		    <div class="well">
-		     <p>장진용</p>
-		     <img src="/resources/img/tomcat.png" class="img-circle" height="55" width="55" alt="WebService">
-		    </div>
-		  </div>
-		  
-		  <div class="col-sm-3  col-xs-6 cursor-pointer">
-		    <div class="well">
-		     <p>최재연</p>
-		     <img src="/resources/img/javascript.png" class="img-circle" height="55" width="55" alt="JavaScript">
-		    </div>
-		  </div>
-		  
-		  <div class="col-sm-3 col-xs-6 cursor-pointer">
-		    <div class="well">
-		     <p>한충렬</p>
-		     <img src="/resources/img/java.png" class="img-circle" height="55" width="55" alt="Java">
-		    </div>
-		  </div>
-		  
-		  <div class="col-sm-3  col-xs-6 cursor-pointer">
-		    <div class="well">
-		     <p>홍준호</p>
-		     <img src="/resources/img/tomcat.png" class="img-circle" height="55" width="55" alt="WebService">
-		    </div>
-		  </div>
-		  
+<% 		}%>
 		</div>
-      
-		<ul class="pagination">
-			<li class="previous"><a href="#">Previous</a></li>
-		   	<li class="active"><a href="#">1</a></li>
-		   	<li class="next"><a href="#">Next</a></li>
-		</ul>
 	  
     </div>
 	    
